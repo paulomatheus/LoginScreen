@@ -14,17 +14,31 @@ struct ContentView: View {
     @State private var showAlert: Bool = false
     
     var body: some View {
-        VStack {
-            TextField("Usuário", text: $username).frame(maxWidth: 100)
-            SecureField("Senha", text: $password).frame(maxWidth: 100)
-            Button("Login", action: handleLogin)
-            
-            Button("Esqueci a senha") {
-                alertMessage = "Função de recuperação de senha não implementada."
-                showAlert = true
+        VStack(spacing: 20) {
+            VStack(spacing: 10) {
+                TextField("Usuário", text: $username)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 200)
+                SecureField("Senha", text: $password)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 200)
+            }
+            VStack(spacing: 10) {
+                Button("Login", action: handleLogin)
+                    .frame(width: 200)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                
+                Button("Esqueci a senha") {
+                    alertMessage = "Liga no 0800 e pede ajuda =)"
+                    showAlert = true
+                }
+                .foregroundColor(.blue)
             }
         }
-        .padding()
+        
         .alert(alertMessage, isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
         }
